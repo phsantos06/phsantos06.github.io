@@ -3,69 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Paulo Hnerique">
-    <meta name="descripition" content="Faça o seu loguin">
-    <title>Tela Login</title>
+    <meta name="author" content="Paulo Henrique">
+    <meta name="description" content="Construindo o meu futuro a cada linha.">
+    <title>Meu site</title>
+    <link rel="icon" href="Paulo.jpeg">
     <style>
-        /*Alinhamento*/
         body{
-            margin: 0%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size:50px ;
-            /*Cor de fundo*/
-            background: linear-gradient(-45deg, #0f2027, #203a43,#2c5364);
-            background-size:400% 400%;
-            animation: gradient 5s ease infinite;  
+            margin:0;
+            font-family: 'Poppins', sans-serif;
+            background-color:#0D1117;
+            color:#C9D1D9;
         }
-        /*Animação*/
-         @keyframes gradient{
-            0%{background-position: 0% 50%;}
-            50%{background-position: 100% 50%;}
-            100%{background-position: 0% 50%;}
-        }
-        /*Bordas*/
-       button{
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    background: #2c5364;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
 
-button:hover{
-    background: #203a43;
-}
-form{
-    background: #203a43;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(79, 77, 77, 0.3);
-    width: 300px;
-}
-input{
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 6px;
-    border: 1px solid #d0c6f3;
-}
+        .container{
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1,h2,h3,h4,h5,h6{
+            color: white;
+        }
+
+        hr{
+            border: 1px solid #21262D;
+            margin: 30px 0;
+        }
+
+        /* FOTO */
+        .foto{
+            text-align: center;
+        }
+
+        .foto img{
+            width:120px;
+            border-radius:50%;
+            border:3px solid #58A6FF;
+        }
+
+        /* BOTÕES */
+        .btn{
+            display:inline-block;
+            background:#58A6FF;
+            color:white;
+            padding:10px 15px;
+            border-radius:8px;
+            text-decoration:none;
+            margin-top:10px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#1F6FEB;
+            transform: translateY(-2px);
+        }
+
+        ul{
+            padding-left:20px;
+        }
+
+        table{
+            width:100%;
+            border-collapse: collapse;
+            margin-top:10px;
+        }
+
+        th, td{
+            border:1px solid #30363D;
+            padding:10px;
+        }
+
+        th{
+            background:#161B22;
+            color:white;
+        }
+
+        .contatos a{
+            display:block;
+            margin-bottom:10px;
+        }
     </style>
 </head>
 <body>
-    <!--Login e senha-->
-    <form>
-        <label></label>
-  <input type="text" name="Login" placeholder="Login" required>
-  <label></label>
-  <input type="password" name="senha " placeholder="Senha" required>
-  <button type="submit">Confirmar</button>
-    </form>
+    <div class="container">
+
+    <!-- SOBRE -->
+    <div class="foto">
+        <img src="Paulo.jpeg" alt="Minha foto">
+        <h1>Paulo Henrique</h1>
+        <p>Desenvolvedor de Software em formação</p>
+    </div>
+
+    <hr>
+
+    <h2>QUEM SOU EU ?</h2>
+    <p>
+        Olá, tudo bem? Me chamo Paulo e sou um jovem programador júnior que deseja seguir a carreira
+        na tecnologia, garantindo códigos organizados, limpos e bem estruturados.
+    </p>
+
+    <a href="sobre.html" class="btn">Saiba mais</a>
+
+    <hr>
+
+    <!-- HABILIDADES -->
+    <h2>HABILIDADES</h2>
+    <ul>
+        <li>Responsabilidade e comprometimento</li>
+        <li>Facilidade em aprender novas funções</li>
+        <li>Boa comunicação</li>
+        <li>Trabalho em equipe</li>
+        <li>Organização e atenção aos detalhes</li>
+        <li>Cumprimento de prazos</li>
+        <li>Proatividade</li>
+    </ul>
+
+    <hr>
+
+    <!-- COMPETÊNCIAS -->
+    <h2>COMPETÊNCIAS TÉCNICAS</h2>
+    <table>
+        <tr>
+            <th>Conhecimentos</th>
+            <th>Nível</th>
+        </tr>
+        <tr><td>Informática</td><td>Intermediário</td></tr>
+        <tr><td>Lógica de programação</td><td>Intermediário</td></tr>
+        <tr><td>HTML</td><td>Intermediário</td></tr>
+        <tr><td>CSS</td><td>Intermediário</td></tr>
+        <tr><td>Python</td><td>Básico</td></tr>
+        <tr><td>SQL</td><td>Básico</td></tr>
+        <tr><td>Java</td><td>Aprendizado</td></tr>
+        <tr><td>JavaScript</td><td>Aprendizado</td></tr>
+        <tr><td>Inglês</td><td>Aprendizado</td></tr>
+    </table>
+
+    <hr>
+
+    <!-- OBJETIVO -->
+    <h2>OBJETIVO PROFISSIONAL</h2>
+    <p>
+        Busco uma oportunidade na área de Tecnologia da Informação para desenvolver minhas
+        habilidades em programação, adquirir experiência prática e crescer profissionalmente.
+        Quero contribuir com dedicação, responsabilidade e vontade de aprender.
+    </p>
+
+    <hr>
+
+    <!-- FORMAÇÃO -->
+    <h2>FORMAÇÃO ACADÊMICA</h2>
+    <p>
+        Ensino Médio Técnico concluído com formação voltada para tecnologia,
+        estudos em Lógica de programação, SQL, Python, HTML e CSS.
+    </p>
+    <p>
+        Cursando Bacharelado em Engenharia de Software.
+    </p>
+
+    <hr>
+
+    <!-- CURSOS -->
+    <h2>CURSOS</h2>
+    <ul>
+        <li>Programação em Python</li>
+        <li>Desenvolvimento Web com HTML e CSS</li>
+        <li>Banco de Dados e SQL</li>
+        <li>Lógica de Programação</li>
+        <li>Inglês em andamento</li>
+    </ul>
+
+    <hr>
+
+    <!-- CONTATOS -->
+    <h2>CONTATOS</h2>
+    <div class="contatos">
+        <a class="btn" href="https://wa.me/qr/KVSFGG4ZMP55C1" target="_blank">WhatsApp</a>
+        <a class="btn" href="mailto:ph294420@gmail.com" target="_blank">E-mail</a>
+        <a class="btn" href="https://www.linkedin.com/in/paulo-henrique-33453b2a4" target="_blank">LinkedIn</a>
+    </div>
+</div>
 </body>
 </html>
