@@ -8,6 +8,9 @@
    ========================================================= */
 (() => {
   const root = document.documentElement;
+  const i18n = window.I18N;
+  const t = (k, padrao) => (i18n ? i18n.t(k) : padrao);
+  const aoTrocarIdioma = (fn) => i18n && i18n.on(fn);
 
   /* ---------- Menu mobile + header que some ao rolar (independe de libs) ---------- */
   const nav = document.querySelector(".nav");
@@ -15,11 +18,14 @@
   const mmenu = document.getElementById("menu-mobile");
   const toggleLabel = toggle.querySelector(".nav__toggle-label");
   let menuAberto = false;
+  const rotuloMenu = () => (toggleLabel.textContent = menuAberto ? t("menu.close", "Fechar") : t("menu.open", "Menu"));
+  rotuloMenu();
+  aoTrocarIdioma(rotuloMenu);
 
   function abrirMenu(abrir) {
     menuAberto = abrir;
     toggle.setAttribute("aria-expanded", abrir);
-    toggleLabel.textContent = abrir ? "Fechar" : "Menu";
+    rotuloMenu();
     document.body.classList.toggle("menu-open", abrir);
     nav.classList.remove("is-hidden");
     if (abrir) {
@@ -56,6 +62,8 @@
   if (!window.gsap || !window.ScrollTrigger) return; // sem libs: site estático e legível
 
   gsap.registerPlugin(ScrollTrigger);
+  // textos mudam de tamanho ao trocar o idioma: recalcula os gatilhos
+  aoTrocarIdioma(() => requestAnimationFrame(() => ScrollTrigger.refresh()));
   const M = {
     main: { duration: 1.6, ease: "expo.out" },
     text: { duration: 0.9, ease: "power4.out" },
@@ -125,14 +133,14 @@
      REDUCED MOTION: só transições essenciais e curtas
      ========================================================== */
   if (reduce) {
-    gsap.utils.toArray(".project, .system, .lab__list, .step, .about__grid, .contact__title").forEach((el) =>
+    gsap.utils.toArray(".project, .system, .us__head, .us__slots, .lab__list, .step, .about__grid, .contact__title").forEach((el) =>
       gsap.from(el, { autoAlpha: 0, duration: 0.4, scrollTrigger: { trigger: el, start: "top 90%", once: true } })
     );
     return;
   }
 
-  const heroWords = splitWords(document.querySelector("[data-split]"));
-  const manifestoWords = splitWords(document.querySelector("[data-words]"));
+  const heroTitle = document.querySelector("[data-split]");
+  const heroWords = splitWords(heroTitle);
   const mm = gsap.matchMedia();
 
   /* ==========================================================
@@ -175,12 +183,26 @@
   /* ==========================================================
      2. MANIFESTO — pausa; o scroll "escreve" o texto
      ========================================================== */
-  gsap.set(manifestoWords, { opacity: 0.12 });
-  gsap.to(manifestoWords, {
-    opacity: 1, ease: "none", stagger: 0.1,
-    scrollTrigger: { trigger: ".manifesto", start: "top 30%", end: "bottom bottom", scrub: 0.4 },
-  });
+  let manifesto;
+  function montarManifesto() {
+    const words = splitWords(document.querySelector("[data-words]"));
+    gsap.set(words, { opacity: 0.12 });
+    manifesto = gsap.to(words, {
+      opacity: 1, ease: "none", stagger: 0.1,
+      scrollTrigger: { trigger: ".manifesto", start: "top 30%", end: "bottom bottom", scrub: 0.4 },
+    });
+  }
+  montarManifesto();
   gsap.from(".manifesto .eyebrow", { x: -20, autoAlpha: 0, ...M.text, scrollTrigger: { trigger: ".manifesto", start: "top 60%" } });
+
+  // troca de idioma: o texto novo chega inteiro, então refaz o split sem repetir a abertura
+  aoTrocarIdioma(() => {
+    intro.progress(1);
+    splitWords(heroTitle);
+    manifesto.scrollTrigger.kill();
+    manifesto.kill();
+    montarManifesto();
+  });
 
   /* ==========================================================
      3. PROJETOS — protagonistas
@@ -248,6 +270,44 @@
         });
       }
     });
+  });
+
+  /* ==========================================================
+     EUA — expectativa: a faixa "em breve" corre com o scroll
+     e as vagas abertas se desenham uma a uma
+     ========================================================== */
+  mm.add({ desktop: "(min-width: 821px)", mobile: "(max-width: 820px)" }, (ctx) => {
+    const { desktop } = ctx.conditions;
+
+    // faixa atravessa a seção no sentido da leitura, mais longe no celular (tela estreita)
+    gsap.fromTo(".us__track", { xPercent: desktop ? 0 : 4 }, {
+      xPercent: desktop ? -28 : -44, ease: "none",
+      scrollTrigger: { trigger: ".us", start: "top bottom", end: "bottom top", scrub: 0.6 },
+    });
+
+    const head = { trigger: ".us__head", start: desktop ? "top 75%" : "top 85%" };
+    gsap.from(".us__title", { yPercent: 60, autoAlpha: 0, ...M.text, duration: 1.1, scrollTrigger: head });
+    gsap.from(".us__side > *", { y: 20, autoAlpha: 0, stagger: 0.12, ...M.text, delay: 0.2, scrollTrigger: head });
+
+    const slots = gsap.utils.toArray(".slot");
+    document.querySelector(".us__slots").classList.add("has-motion");
+    slots.forEach((s) => s.classList.remove("is-ready"));
+    // moldura abre de cima para baixo → "+" gira para o lugar → texto sobe
+    // (o hover do "+" é CSS: só liga depois que a entrada termina, para não brigar com o GSAP)
+    const abrir = (alvo) =>
+      gsap.timeline({ paused: true, defaults: M.text, onComplete: () => alvo.classList.add("is-ready") })
+        .fromTo(alvo.querySelector(".slot__frame"), { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", ...M.main })
+        .fromTo(alvo.querySelector(".slot__plus"), { scale: 0.4, rotate: -90, autoAlpha: 0 }, { scale: 1, rotate: 0, autoAlpha: 1, ...M.main, clearProps: "transform" }, 0.25)
+        .from(alvo.querySelectorAll("h3, p"), { y: 24, autoAlpha: 0, stagger: 0.08 }, 0.35);
+    const tls = slots.map(abrir);
+
+    if (desktop) {
+      // lado a lado: abrem juntas, em cascata
+      ScrollTrigger.create({ trigger: ".us__slots", start: "top 80%", once: true, onEnter: () => tls.forEach((tl, i) => gsap.delayedCall(i * 0.14, () => tl.play())) });
+    } else {
+      // empilhadas: cada vaga abre quando chega
+      slots.forEach((s, i) => ScrollTrigger.create({ trigger: s, start: "top 88%", once: true, onEnter: () => tls[i].play() }));
+    }
   });
 
   /* ==========================================================
@@ -323,7 +383,7 @@
   const label = cursor.querySelector(".cursor__label");
   document.querySelectorAll("[data-cursor]").forEach((el) => {
     const cls = "is-" + el.dataset.cursor;
-    el.addEventListener("pointerenter", () => { label.textContent = el.dataset.label || "Ver projeto"; cursor.classList.add(cls); });
+    el.addEventListener("pointerenter", () => { label.textContent = el.dataset.label || t("cursor.project", "Ver projeto"); cursor.classList.add(cls); });
     el.addEventListener("pointerleave", () => cursor.classList.remove(cls));
   });
 
