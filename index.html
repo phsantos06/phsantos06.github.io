@@ -3,8 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Paulo Henrique — Desenvolvedor de Software</title>
-  <meta name="description" content="Portfólio de Paulo Henrique: sites institucionais e sistemas web — VOS Advocacia, Avanço Engenharia, AABB Ipiaú, Cambio Express, Coxinha do Barão e PDV Boa Praça." />
+  <title data-i18n="meta.title">Paulo Henrique — Desenvolvedor de Software</title>
+  <meta name="description" data-i18n-attr="content:meta.desc" content="Portfólio de Paulo Henrique: sites institucionais e sistemas web — VOS Advocacia, Avanço Engenharia, AABB Ipiaú, Cambio Express, Coxinha do Barão e PDV Boa Praça." />
+  <script>
+    /* idioma antes da primeira pintura: ?lang= → escolha salva → idioma do navegador → inglês */
+    (function () {
+      var ok = ["pt", "en", "es"], l = null, d = document.documentElement;
+      function pick(x) { x = String(x || "").slice(0, 2).toLowerCase(); return ok.indexOf(x) > -1 ? x : null; }
+      try { l = pick(new URLSearchParams(location.search).get("lang")) || pick(localStorage.getItem("lang")); } catch (e) {}
+      var n = navigator.languages || [navigator.language];
+      for (var i = 0; i < n.length && !l; i++) l = pick(n[i]);
+      l = l || "en";
+      window.__lang = l;
+      d.lang = l === "pt" ? "pt-BR" : l;
+      if (l !== "pt") { d.classList.add("i18n-wait"); setTimeout(function () { d.classList.remove("i18n-wait"); }, 2500); }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -18,30 +32,46 @@
 
   <header class="nav">
     <a href="#top" class="nav__logo link-u" data-cursor="link">Paulo Henrique<span>®</span></a>
-    <nav aria-label="Principal">
+    <nav data-i18n-attr="aria-label:nav.aria" aria-label="Principal">
       <ul class="nav__list">
-        <li><a class="link-u" href="#projetos" data-cursor="link">Sites</a></li>
-        <li><a class="link-u" href="#sistemas" data-cursor="link">Sistemas</a></li>
-        <li><a class="link-u" href="#estudos" data-cursor="link">Estudos</a></li>
-        <li><a class="link-u" href="#sobre" data-cursor="link">Sobre</a></li>
+        <li><a class="link-u" href="#projetos" data-cursor="link" data-i18n="nav.sites">Sites</a></li>
+        <li><a class="link-u" href="#sistemas" data-cursor="link" data-i18n="nav.systems">Sistemas</a></li>
+        <li><a class="link-u" href="#eua" data-cursor="link" data-i18n="nav.us">EUA</a></li>
+        <li><a class="link-u" href="#estudos" data-cursor="link" data-i18n="nav.lab">Estudos</a></li>
+        <li><a class="link-u" href="#sobre" data-cursor="link" data-i18n="nav.about">Sobre</a></li>
       </ul>
     </nav>
-    <a href="#contato" class="nav__cta magnetic" data-cursor="link"><span>Contato</span></a>
+    <div class="nav__actions">
+      <div class="lang" role="group" data-i18n-attr="aria-label:lang.aria" aria-label="Idioma">
+        <button type="button" data-lang="pt" aria-pressed="true" aria-label="Português" lang="pt-BR" data-cursor="link">PT</button>
+        <button type="button" data-lang="en" aria-pressed="false" aria-label="English" lang="en" data-cursor="link">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false" aria-label="Español" lang="es" data-cursor="link">ES</button>
+      </div>
+      <a href="#contato" class="nav__cta magnetic" data-cursor="link"><span data-i18n="nav.contact">Contato</span></a>
+    </div>
     <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu-mobile"><span class="nav__toggle-label">Menu</span><span class="nav__burger" aria-hidden="true"><i></i><i></i></span></button>
   </header>
 
   <!-- Menu mobile -->
   <div class="mmenu" id="menu-mobile" hidden>
-    <nav aria-label="Menu mobile">
+    <nav data-i18n-attr="aria-label:nav.mobileAria" aria-label="Menu mobile">
       <ol class="mmenu__list">
-        <li><a href="#projetos"><span>01</span>Sites</a></li>
-        <li><a href="#sistemas"><span>02</span>Sistemas</a></li>
-        <li><a href="#estudos"><span>03</span>Estudos</a></li>
-        <li><a href="#sobre"><span>04</span>Sobre</a></li>
-        <li><a href="#contato"><span>05</span>Contato</a></li>
+        <li><a href="#projetos"><span>01</span><span data-i18n="nav.sites">Sites</span></a></li>
+        <li><a href="#sistemas"><span>02</span><span data-i18n="nav.systems">Sistemas</span></a></li>
+        <li><a href="#eua"><span>03</span><span data-i18n="nav.us">EUA</span></a></li>
+        <li><a href="#estudos"><span>04</span><span data-i18n="nav.lab">Estudos</span></a></li>
+        <li><a href="#sobre"><span>05</span><span data-i18n="nav.about">Sobre</span></a></li>
+        <li><a href="#contato"><span>06</span><span data-i18n="nav.contact">Contato</span></a></li>
       </ol>
     </nav>
-    <a class="mmenu__foot" href="https://github.com/phsantos06" target="_blank" rel="noopener">GitHub ↗</a>
+    <div class="mmenu__foot">
+      <a class="mmenu__gh" href="https://github.com/phsantos06" target="_blank" rel="noopener">GitHub ↗</a>
+      <div class="lang lang--menu" role="group" data-i18n-attr="aria-label:lang.aria" aria-label="Idioma">
+        <button type="button" data-lang="pt" aria-pressed="true" aria-label="Português" lang="pt-BR">PT</button>
+        <button type="button" data-lang="en" aria-pressed="false" aria-label="English" lang="en">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false" aria-label="Español" lang="es">ES</button>
+      </div>
+    </div>
   </div>
 
   <main id="top">
@@ -50,96 +80,93 @@
       <div class="hero__bg" aria-hidden="true"></div>
       <div class="hero__depth" aria-hidden="true"><div class="hero__orb"><div class="hero__orb-core"></div></div></div>
       <div class="hero__inner">
-        <p class="eyebrow hero__eyebrow"><span class="dot"></span> Disponível para projetos — 2026</p>
-        <h1 class="hero__title" data-split>
-          <span class="line">Sites e sistemas</span>
-          <span class="line">feitos com <em class="accent">intenção</em></span>
-        </h1>
+        <p class="eyebrow hero__eyebrow"><span class="dot"></span> <span data-i18n="hero.eyebrow">Disponível para projetos — 2026</span></p>
+        <h1 class="hero__title" data-split data-i18n="hero.title"><span class="line">Sites e sistemas</span> <span class="line">feitos com <em class="accent">intenção</em></span></h1>
         <div class="hero__foot">
-          <p class="hero__desc">Sou Paulo Henrique, desenvolvedor de software. Crio sites institucionais e sistemas web — de landing pages a PDVs em nuvem — para negócios que precisam de resultado real.</p>
-          <a href="#projetos" class="btn magnetic" data-cursor="link"><span class="btn__text">Ver trabalhos</span><span class="btn__icon" aria-hidden="true">↓</span></a>
+          <p class="hero__desc" data-i18n="hero.desc">Sou Paulo Henrique, desenvolvedor de software. Crio sites institucionais e sistemas web — de landing pages a PDVs em nuvem — para negócios que precisam de resultado real.</p>
+          <a href="#projetos" class="btn magnetic" data-cursor="link"><span class="btn__text" data-i18n="hero.cta">Ver trabalhos</span><span class="btn__icon" aria-hidden="true">↓</span></a>
         </div>
       </div>
-      <div class="hero__scroll" aria-hidden="true"><span>Role</span><i></i></div>
+      <div class="hero__scroll" aria-hidden="true"><span data-i18n="hero.scroll">Role</span><i></i></div>
     </section>
 
     <!-- ============ 2. MANIFESTO — PAUSA + REVELAÇÃO ============ -->
     <section class="manifesto" aria-label="Manifesto">
       <div class="manifesto__sticky">
-        <p class="eyebrow">(01) — Manifesto</p>
-        <p class="manifesto__text" data-words>Um clube, um escritório de advocacia, uma construtora, uma salgaderia. Negócios diferentes, a mesma pergunta: o que essa pessoa precisa encontrar primeiro? Cada site e cada sistema que construo começa pela resposta.</p>
+        <p class="eyebrow" data-i18n="manifesto.eyebrow">(01) — Manifesto</p>
+        <p class="manifesto__text" data-words data-i18n="manifesto.text">Um clube, um escritório de advocacia, uma construtora, uma salgaderia. Negócios diferentes, a mesma pergunta: o que essa pessoa precisa encontrar primeiro? Cada site e cada sistema que construo começa pela resposta.</p>
       </div>
     </section>
 
     <!-- ============ 3. SITES — PROTAGONISTAS ============ -->
     <section class="projects" id="projetos">
       <header class="section-head">
-        <p class="eyebrow">(02) — Sites recentes</p>
-        <h2 class="section-title" data-reveal-title>Sites</h2>
+        <p class="eyebrow" data-i18n="sites.eyebrow">(02) — Sites recentes</p>
+        <h2 class="section-title" data-reveal-title data-i18n="sites.title">Sites</h2>
         <p class="section-count">05</p>
       </header>
 
       <article class="project" data-project>
-        <a href="https://vos-advocacia.vercel.app" target="_blank" rel="noopener" class="project__link" data-cursor="project" aria-label="Abrir site VOS Advocacia (nova aba)">
-          <div class="project__media"><div class="project__img"><img src="assets/projetos/vos.jpg" alt="Página inicial do site Victor Menezes Advocacia" width="1440" height="1000" loading="lazy" /></div></div>
+        <a href="https://vos-advocacia.vercel.app" target="_blank" rel="noopener" class="project__link" data-cursor="project" data-i18n-attr="aria-label:vos.aria" aria-label="Abrir site VOS Advocacia (nova aba)">
+          <div class="project__media"><div class="project__img"><img src="assets/projetos/vos.jpg" data-i18n-attr="alt:vos.alt" alt="Página inicial do site Victor Menezes Advocacia" width="1440" height="1000" loading="lazy" /></div></div>
           <div class="project__info">
             <span class="project__index">01</span>
             <h3 class="project__title">VOS Advocacia</h3>
-            <p class="project__cat">Escritório de advocacia · Itabuna, BA</p>
+            <p class="project__cat" data-i18n="vos.cat">Escritório de advocacia · Itabuna, BA</p>
             <ul class="project__stack"><li>Next.js</li><li>React</li><li>Framer Motion</li></ul>
-            <span class="project__cta">Visitar site <i>↗</i></span>
+            <span class="project__cta" data-i18n="cta.site">Visitar site <i>↗</i></span>
           </div>
         </a>
       </article>
 
       <article class="project project--right" data-project>
-        <a href="https://avanco-engenharia.vercel.app" target="_blank" rel="noopener" class="project__link" data-cursor="project" aria-label="Abrir site Avanço Engenharia (nova aba)">
-          <div class="project__media"><div class="project__img"><img src="assets/projetos/avanco.jpg" alt="Página inicial do site Avanço Engenharia" width="1440" height="1000" loading="lazy" /></div></div>
+        <a href="https://avanco-engenharia.vercel.app" target="_blank" rel="noopener" class="project__link" data-cursor="project" data-i18n-attr="aria-label:avanco.aria" aria-label="Abrir site Avanço Engenharia (nova aba)">
+          <div class="project__media"><div class="project__img"><img src="assets/projetos/avanco.jpg" data-i18n-attr="alt:avanco.alt" alt="Página inicial do site Avanço Engenharia" width="1440" height="1000" loading="lazy" /></div></div>
           <div class="project__info">
             <span class="project__index">02</span>
             <h3 class="project__title">Avanço Engenharia</h3>
-            <p class="project__cat">Construtora e incorporadora · Ipiaú, BA</p>
+            <p class="project__cat" data-i18n="avanco.cat">Construtora e incorporadora · Ipiaú, BA</p>
             <ul class="project__stack"><li>Next.js 16</li><li>Tailwind v4</li><li>Motion</li></ul>
-            <span class="project__cta">Visitar site <i>↗</i></span>
+            <span class="project__cta" data-i18n="cta.site">Visitar site <i>↗</i></span>
           </div>
         </a>
       </article>
 
       <article class="project" data-project>
-        <a href="https://aabb-ipia.vercel.app" target="_blank" rel="noopener" class="project__link" data-cursor="project" aria-label="Abrir site AABB Ipiaú (nova aba)">
-          <div class="project__media"><div class="project__img"><img src="assets/projetos/aabb.jpg" alt="Página inicial do site do clube AABB Ipiaú" width="1440" height="1000" loading="lazy" /></div></div>
+        <a href="https://aabb-ipia.vercel.app" target="_blank" rel="noopener" class="project__link" data-cursor="project" data-i18n-attr="aria-label:aabb.aria" aria-label="Abrir site AABB Ipiaú (nova aba)">
+          <div class="project__media"><div class="project__img"><img src="assets/projetos/aabb.jpg" data-i18n-attr="alt:aabb.alt" alt="Página inicial do site do clube AABB Ipiaú" width="1440" height="1000" loading="lazy" /></div></div>
           <div class="project__info">
             <span class="project__index">03</span>
             <h3 class="project__title">AABB Ipiaú</h3>
-            <p class="project__cat">Clube de lazer e esporte · Ipiaú, BA</p>
+            <p class="project__cat" data-i18n="aabb.cat">Clube de lazer e esporte · Ipiaú, BA</p>
             <ul class="project__stack"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            <span class="project__cta">Visitar site <i>↗</i></span>
+            <span class="project__cta" data-i18n="cta.site">Visitar site <i>↗</i></span>
           </div>
         </a>
       </article>
 
       <article class="project project--right" data-project>
-        <a href="https://cambioexpress.vercel.app" target="_blank" rel="noopener" class="project__link" data-cursor="project" aria-label="Abrir site Cambio Express (nova aba)">
-          <div class="project__media"><div class="project__img"><img src="assets/projetos/cambio.jpg" alt="Página inicial do site Cambio Express com cotações do dia" width="1440" height="1000" loading="lazy" /></div></div>
+        <a href="https://cambioexpress.vercel.app" target="_blank" rel="noopener" class="project__link" data-cursor="project" data-i18n-attr="aria-label:cambio.aria" aria-label="Abrir site Cambio Express (nova aba)">
+          <div class="project__media"><div class="project__img"><img src="assets/projetos/cambio.jpg" data-i18n-attr="alt:cambio.alt" alt="Página inicial do site Cambio Express com cotações do dia" width="1440" height="1000" loading="lazy" /></div></div>
           <div class="project__info">
             <span class="project__index">04</span>
             <h3 class="project__title">Cambio Express</h3>
-            <p class="project__cat">Casa de câmbio · Cotações e WhatsApp</p>
+            <p class="project__cat" data-i18n="cambio.cat">Casa de câmbio · Cotações e WhatsApp</p>
             <ul class="project__stack"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            <span class="project__cta">Visitar site <i>↗</i></span>
+            <span class="project__cta" data-i18n="cta.site">Visitar site <i>↗</i></span>
           </div>
         </a>
       </article>
 
       <article class="project" data-project>
-        <a href="https://phsantos06.github.io/Emagrecimento/" target="_blank" rel="noopener" class="project__link" data-cursor="project" aria-label="Abrir site Vida Leve (nova aba)">
-          <div class="project__media"><div class="project__img"><img src="assets/projetos/vidaleve.jpg" alt="Página inicial do site Vida Leve sobre emagrecimento" width="1440" height="1000" loading="lazy" /></div></div>
+        <a href="https://phsantos06.github.io/Emagrecimento/" target="_blank" rel="noopener" class="project__link" data-cursor="project" data-i18n-attr="aria-label:vidaleve.aria" aria-label="Abrir site Vida Leve (nova aba)">
+          <div class="project__media"><div class="project__img"><img src="assets/projetos/vidaleve.jpg" data-i18n-attr="alt:vidaleve.alt" alt="Página inicial do site Vida Leve sobre emagrecimento" width="1440" height="1000" loading="lazy" /></div></div>
           <div class="project__info">
             <span class="project__index">05</span>
             <h3 class="project__title">Vida Leve</h3>
-            <p class="project__cat">Saúde & emagrecimento · Redesign 2026</p>
-            <ul class="project__stack"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Calculadora</li></ul>
-            <span class="project__cta">Visitar site <i>↗</i></span>
+            <p class="project__cat" data-i18n="vidaleve.cat">Saúde &amp; emagrecimento · Redesign 2026</p>
+            <ul class="project__stack"><li>HTML</li><li>CSS</li><li>JavaScript</li><li data-i18n="stack.calc">Calculadora</li></ul>
+            <span class="project__cta" data-i18n="cta.site">Visitar site <i>↗</i></span>
           </div>
         </a>
       </article>
@@ -148,100 +175,139 @@
     <!-- ============ 4. SISTEMAS — EMPILHAMENTO ============ -->
     <section class="systems" id="sistemas">
       <header class="section-head section-head--systems">
-        <p class="eyebrow">(03) — Sistemas</p>
-        <h2 class="section-title">Sistemas que <em class="accent">operam</em></h2>
-        <p class="systems__intro">Por trás do balcão: login, caixa, estoque e financeiro funcionando todos os dias.</p>
+        <p class="eyebrow" data-i18n="systems.eyebrow">(03) — Sistemas</p>
+        <h2 class="section-title" data-i18n="systems.title">Sistemas que <em class="accent">operam</em></h2>
+        <p class="systems__intro" data-i18n="systems.intro">Por trás do balcão: login, caixa, estoque e financeiro funcionando todos os dias.</p>
       </header>
 
       <div class="systems__stack">
         <article class="system" data-system>
-          <a href="https://coxinha-do-barao.vercel.app" target="_blank" rel="noopener" class="system__card" data-cursor="project" data-label="Ver sistema" aria-label="Abrir sistema Coxinha do Barão (nova aba)">
-            <div class="system__media"><img src="assets/projetos/coxinha.jpg" alt="Tela de login do sistema Coxinha do Barão" width="1440" height="1000" loading="lazy" /></div>
+          <a href="https://coxinha-do-barao.vercel.app" target="_blank" rel="noopener" class="system__card" data-cursor="project" data-i18n-attr="data-label:cursor.system;aria-label:coxinha.aria" data-label="Ver sistema" aria-label="Abrir sistema Coxinha do Barão (nova aba)">
+            <div class="system__media"><img src="assets/projetos/coxinha.jpg" data-i18n-attr="alt:coxinha.alt" alt="Tela de login do sistema Coxinha do Barão" width="1440" height="1000" loading="lazy" /></div>
             <div class="system__body">
               <span class="system__index">S/01</span>
               <h3 class="system__title">Coxinha do Barão</h3>
-              <p class="system__desc">Controle financeiro e vendas para salgaderia: PDV rápido, estoque por produto e dashboard com filtro por período. Instala como aplicativo (PWA) no notebook do balcão.</p>
+              <p class="system__desc" data-i18n="coxinha.desc">Controle financeiro e vendas para salgaderia: PDV rápido, estoque por produto e dashboard com filtro por período. Instala como aplicativo (PWA) no notebook do balcão.</p>
               <ul class="project__stack"><li>React + TS</li><li>Express</li><li>Prisma</li><li>JWT</li><li>PWA</li></ul>
-              <span class="project__cta">Abrir sistema <i>↗</i></span>
+              <span class="project__cta" data-i18n="cta.system">Abrir sistema <i>↗</i></span>
             </div>
           </a>
         </article>
 
         <article class="system" data-system>
-          <a href="https://project-13195764.vercel.app" target="_blank" rel="noopener" class="system__card" data-cursor="project" data-label="Ver sistema" aria-label="Abrir sistema PDV Boa Praça (nova aba)">
-            <div class="system__media"><img src="assets/projetos/pdv.jpg" alt="Tela de login do PDV do Supermercado Boa Praça" width="1440" height="1000" loading="lazy" /></div>
+          <a href="https://project-13195764.vercel.app" target="_blank" rel="noopener" class="system__card" data-cursor="project" data-i18n-attr="data-label:cursor.system;aria-label:pdv.aria" data-label="Ver sistema" aria-label="Abrir sistema PDV Boa Praça (nova aba)">
+            <div class="system__media"><img src="assets/projetos/pdv.jpg" data-i18n-attr="alt:pdv.alt" alt="Tela de login do PDV do Supermercado Boa Praça" width="1440" height="1000" loading="lazy" /></div>
             <div class="system__body">
               <span class="system__index">S/02</span>
               <h3 class="system__title">PDV Boa Praça</h3>
-              <p class="system__desc">Ponto de venda em nuvem, multi-tenant, para supermercados: leitura de código de barras, estoque em tempo real, financeiro, RH e auditoria com isolamento por loja.</p>
+              <p class="system__desc" data-i18n="pdv.desc">Ponto de venda em nuvem, multi-tenant, para supermercados: leitura de código de barras, estoque em tempo real, financeiro, RH e auditoria com isolamento por loja.</p>
               <ul class="project__stack"><li>React 19</li><li>Vite</li><li>Supabase</li><li>RLS</li></ul>
-              <span class="project__cta">Abrir sistema <i>↗</i></span>
+              <span class="project__cta" data-i18n="cta.system">Abrir sistema <i>↗</i></span>
             </div>
           </a>
         </article>
       </div>
     </section>
 
-    <!-- ============ 5. ESTUDOS — ÍNDICE (respiro) ============ -->
+    <!-- ============ 5. EUA — VITRINE "EM BREVE" ============ -->
+    <section class="us" id="eua">
+      <div class="us__marquee" aria-hidden="true">
+        <div class="us__track">
+          <span>Coming soon</span><i>✦</i><span>Em breve</span><i>✦</i><span>Próximamente</span><i>✦</i>
+          <span>Coming soon</span><i>✦</i><span>Em breve</span><i>✦</i><span>Próximamente</span><i>✦</i>
+        </div>
+      </div>
+      <div class="us__inner">
+        <header class="us__head">
+          <p class="eyebrow" data-i18n="us.eyebrow">(04) — Estados Unidos</p>
+          <h2 class="section-title us__title" data-i18n="us.title">Projetos nos <em class="accent">EUA</em></h2>
+          <div class="us__side">
+            <p class="us__status"><span class="dot"></span><span data-i18n="us.status">Em breve</span></p>
+            <p class="us__intro" data-i18n="us.intro">Estou abrindo agenda para empresas nos Estados Unidos: sites e sistemas bilíngues, em inglês e espanhol, com atendimento 100% remoto. Os primeiros projetos aparecem aqui.</p>
+          </div>
+        </header>
+        <ol class="us__slots">
+          <li class="slot">
+            <div class="slot__frame"><span class="slot__n">US/01</span><span class="slot__tag" data-i18n="us.slot">Vaga aberta</span><span class="slot__plus" aria-hidden="true">+</span></div>
+            <h3 data-i18n="us.s1.t">Sites para pequenas empresas</h3>
+            <p data-i18n="us.s1.d">Restaurantes, clínicas e serviços locais: presença clara, rápida e bilíngue.</p>
+          </li>
+          <li class="slot">
+            <div class="slot__frame"><span class="slot__n">US/02</span><span class="slot__tag" data-i18n="us.slot">Vaga aberta</span><span class="slot__plus" aria-hidden="true">+</span></div>
+            <h3 data-i18n="us.s2.t">Sistemas web</h3>
+            <p data-i18n="us.s2.d">Agendamento, pedidos, estoque e painéis feitos sob medida para a operação.</p>
+          </li>
+          <li class="slot">
+            <div class="slot__frame"><span class="slot__n">US/03</span><span class="slot__tag" data-i18n="us.slot">Vaga aberta</span><span class="slot__plus" aria-hidden="true">+</span></div>
+            <h3 data-i18n="us.s3.t">Landing pages</h3>
+            <p data-i18n="us.s3.d">Páginas de campanha focadas em conversão, em inglês e espanhol.</p>
+          </li>
+        </ol>
+        <a href="#contato" class="btn magnetic us__cta" data-cursor="link"><span class="btn__text" data-i18n="us.cta">Começar um projeto</span><span class="btn__icon" aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <!-- ============ 6. ESTUDOS — ÍNDICE (respiro) ============ -->
     <section class="lab" id="estudos">
       <header class="lab__head">
-        <p class="eyebrow">(04) — Estudos</p>
-        <p class="lab__intro">Projetos menores onde pratico fundamentos: JavaScript puro, acessibilidade e interface.</p>
+        <p class="eyebrow" data-i18n="lab.eyebrow">(05) — Estudos</p>
+        <p class="lab__intro" data-i18n="lab.intro">Projetos menores onde pratico fundamentos: JavaScript puro, acessibilidade e interface.</p>
       </header>
       <ul class="lab__list">
-        <li><a href="https://phsantos06.github.io/relogio-digital/" target="_blank" rel="noopener" data-cursor="link"><span class="lab__n">E/01</span><span class="lab__name">Relógio Digital</span><span class="lab__desc">Relógio, cronômetro com voltas e temporizador com alarme</span><span class="lab__arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="https://phsantos06.github.io/login/" target="_blank" rel="noopener" data-cursor="link"><span class="lab__n">E/02</span><span class="lab__name">Tela de Login</span><span class="lab__desc">Validação acessível, mostrar senha e estados de carregamento</span><span class="lab__arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="https://calculadora-phsantos06.vercel.app" target="_blank" rel="noopener" data-cursor="link"><span class="lab__n">E/03</span><span class="lab__name">Calculadora Digital</span><span class="lab__desc">Teclado, histórico e contas sem eval()</span><span class="lab__arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="https://phsantos06.github.io/Portif-lio-simples/" target="_blank" rel="noopener" data-cursor="link"><span class="lab__n">E/04</span><span class="lab__name">Portfólio Simples</span><span class="lab__desc">Versão leve deste portfólio, com filtro e tema escuro</span><span class="lab__arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://phsantos06.github.io/relogio-digital/" target="_blank" rel="noopener" data-cursor="link"><span class="lab__n">E/01</span><span class="lab__name" data-i18n="lab.clock.name">Relógio Digital</span><span class="lab__desc" data-i18n="lab.clock.desc">Relógio, cronômetro com voltas e temporizador com alarme</span><span class="lab__arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://phsantos06.github.io/login/" target="_blank" rel="noopener" data-cursor="link"><span class="lab__n">E/02</span><span class="lab__name" data-i18n="lab.login.name">Tela de Login</span><span class="lab__desc" data-i18n="lab.login.desc">Validação acessível, mostrar senha e estados de carregamento</span><span class="lab__arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://calculadora-phsantos06.vercel.app" target="_blank" rel="noopener" data-cursor="link"><span class="lab__n">E/03</span><span class="lab__name" data-i18n="lab.calc.name">Calculadora Digital</span><span class="lab__desc" data-i18n="lab.calc.desc">Teclado, histórico e contas sem eval()</span><span class="lab__arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://phsantos06.github.io/Portif-lio-simples/" target="_blank" rel="noopener" data-cursor="link"><span class="lab__n">E/04</span><span class="lab__name" data-i18n="lab.simple.name">Portfólio Simples</span><span class="lab__desc" data-i18n="lab.simple.desc">Versão leve deste portfólio, com filtro e tema escuro</span><span class="lab__arrow" aria-hidden="true">↗</span></a></li>
       </ul>
     </section>
 
-    <!-- ============ 6. SOBRE — ESPAÇO (quase estático) ============ -->
+    <!-- ============ 7. SOBRE — ESPAÇO (quase estático) ============ -->
     <section class="about" id="sobre">
-      <p class="eyebrow">(05) — Sobre</p>
+      <p class="eyebrow" data-i18n="about.eyebrow">(06) — Sobre</p>
       <div class="about__grid">
-        <p class="about__lead">Transformo necessidades de negócios locais em produtos digitais — equilibrando <em class="accent">estética</em>, clareza e engenharia.</p>
+        <p class="about__lead" data-i18n="about.lead">Transformo necessidades de negócios locais em produtos digitais — equilibrando <em class="accent">estética</em>, clareza e engenharia.</p>
         <ul class="about__stats">
-          <li><strong data-count="7">0</strong><span>sites e sistemas no ar</span></li>
-          <li><strong data-count="15">0</strong><span>repositórios públicos</span></li>
-          <li><strong data-count="100" data-plus>0</strong><span>commits nos projetos recentes</span></li>
+          <li><strong data-count="7">0</strong><span data-i18n="about.s1">sites e sistemas no ar</span></li>
+          <li><strong data-count="15">0</strong><span data-i18n="about.s2">repositórios públicos</span></li>
+          <li><strong data-count="100" data-plus>0</strong><span data-i18n="about.s3">commits nos projetos recentes</span></li>
         </ul>
       </div>
     </section>
 
-    <!-- ============ 6. PROCESSO — MOVIMENTO HORIZONTAL ============ -->
+    <!-- ============ 8. PROCESSO — MOVIMENTO HORIZONTAL ============ -->
     <section class="process" id="processo">
       <div class="process__pin">
         <header class="process__head">
-          <p class="eyebrow">(06) — Processo</p>
-          <h2 class="section-title">Do problema<br/>ao <em class="accent">produto</em></h2>
+          <p class="eyebrow" data-i18n="process.eyebrow">(07) — Processo</p>
+          <h2 class="section-title" data-i18n="process.title">Do problema<br>ao <em class="accent">produto</em></h2>
         </header>
         <div class="process__track">
-          <div class="step"><span class="step__n">01</span><h3>Entender</h3><p>Conversar com o negócio: quem é o cliente, o que ele procura e o que precisa acontecer.</p></div>
-          <div class="step"><span class="step__n">02</span><h3>Estruturar</h3><p>Seções, fluxos e hierarquia. No sistema, os dados e as permissões de cada usuário.</p></div>
-          <div class="step"><span class="step__n">03</span><h3>Desenhar</h3><p>Tipografia, cor e identidade visual coerentes com a marca — em qualquer tela.</p></div>
-          <div class="step"><span class="step__n">04</span><h3>Construir</h3><p>Código performático, acessível e responsivo, com segurança onde há dados.</p></div>
-          <div class="step"><span class="step__n">05</span><h3>Publicar</h3><p>Deploy, domínio e ajustes finos com o site ou sistema já em uso.</p></div>
+          <div class="step"><span class="step__n">01</span><h3 data-i18n="step1.t">Entender</h3><p data-i18n="step1.d">Conversar com o negócio: quem é o cliente, o que ele procura e o que precisa acontecer.</p></div>
+          <div class="step"><span class="step__n">02</span><h3 data-i18n="step2.t">Estruturar</h3><p data-i18n="step2.d">Seções, fluxos e hierarquia. No sistema, os dados e as permissões de cada usuário.</p></div>
+          <div class="step"><span class="step__n">03</span><h3 data-i18n="step3.t">Desenhar</h3><p data-i18n="step3.d">Tipografia, cor e identidade visual coerentes com a marca — em qualquer tela.</p></div>
+          <div class="step"><span class="step__n">04</span><h3 data-i18n="step4.t">Construir</h3><p data-i18n="step4.d">Código performático, acessível e responsivo, com segurança onde há dados.</p></div>
+          <div class="step"><span class="step__n">05</span><h3 data-i18n="step5.t">Publicar</h3><p data-i18n="step5.d">Deploy, domínio e ajustes finos com o site ou sistema já em uso.</p></div>
         </div>
         <div class="process__meter" aria-hidden="true"><i></i></div>
       </div>
     </section>
 
-    <!-- ============ 7. CONTATO — NOVO IMPACTO ============ -->
+    <!-- ============ 9. CONTATO — NOVO IMPACTO ============ -->
     <section class="contact" id="contato">
-      <p class="eyebrow">(07) — Contato</p>
-      <h2 class="contact__title"><span class="contact__line">Seu negócio</span><span class="contact__line">é o <em class="accent">próximo?</em></span></h2>
-      <a href="https://github.com/phsantos06" target="_blank" rel="noopener" class="contact__mail magnetic" data-cursor="link"><span>Fale comigo pelo GitHub ↗</span></a>
+      <p class="eyebrow" data-i18n="contact.eyebrow">(08) — Contato</p>
+      <h2 class="contact__title"><span class="contact__line" data-i18n="contact.l1">Seu negócio</span><span class="contact__line" data-i18n="contact.l2">é o <em class="accent">próximo?</em></span></h2>
+      <a href="https://github.com/phsantos06" target="_blank" rel="noopener" class="contact__mail magnetic" data-cursor="link"><span data-i18n="contact.cta">Fale comigo pelo GitHub ↗</span></a>
       <footer class="footer">
         <span>© 2026 Paulo Henrique</span>
         <ul>
           <li><a class="link-u" href="https://github.com/phsantos06" target="_blank" rel="noopener" data-cursor="link">GitHub</a></li>
         </ul>
-        <a class="link-u" href="#top" data-cursor="link">Voltar ao topo ↑</a>
+        <a class="link-u" href="#top" data-cursor="link" data-i18n="footer.top">Voltar ao topo ↑</a>
       </footer>
     </section>
   </main>
 
+  <script src="i18n.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
