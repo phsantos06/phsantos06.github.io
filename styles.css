@@ -449,3 +449,9 @@ body.menu-open { overflow: hidden; }
 html { scrollbar-width: none; -ms-overflow-style: none; }
 html::-webkit-scrollbar, body::-webkit-scrollbar, .mmenu::-webkit-scrollbar { display: none; width: 0; height: 0; }
 .mmenu { scrollbar-width: none; }
+
+/* EUA: projeto publicado + vagas restantes */
+.us__project { margin-bottom: clamp(4rem, 9vw, 8rem); }
+.us__slots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.us__slots .slot__frame { aspect-ratio: 16 / 9; }
+@media (max-width: 900px) { .us__slots { grid-template-columns: 1fr; } }

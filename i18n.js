@@ -15,7 +15,7 @@ window.I18N = (() => {
 
     en: {
       "meta.title": "Paulo Henrique — Software Developer",
-      "meta.desc": "Portfolio of Paulo Henrique: business websites and web systems — VOS Advocacia, Avanço Engenharia, AABB Ipiaú, Cambio Express, Coxinha do Barão and PDV Boa Praça.",
+      "meta.desc": "Portfolio of Paulo Henrique: business websites and web systems — VOS Advocacia, Avanço Engenharia, AABB Ipiaú, Cambio Express, Master Art and Frame, Coxinha do Barão and PDV Boa Praça.",
       "menu.open": "Menu",
       "menu.close": "Close",
       "cursor.project": "View project",
@@ -72,9 +72,14 @@ window.I18N = (() => {
 
       "us.eyebrow": "(04) — United States",
       "us.title": 'Projects in the <em class="accent">US</em>',
-      "us.status": "Coming soon",
-      "us.intro": "I’m opening my schedule to businesses in the United States: bilingual websites and systems, in English and Spanish, with fully remote collaboration. The first projects will show up here.",
+      "us.status": "First project live",
+      "us.intro": "Websites and systems for businesses in the United States, in English and Spanish, with fully remote collaboration. The first one is already live in Tampa, Florida.",
       "us.slot": "Open slot",
+      "maf.cat": "Custom picture framing · Tampa, FL",
+      "maf.en": "English",
+      "maf.seo": "Local SEO",
+      "maf.aria": "Open the Master Art and Frame website (new tab)",
+      "maf.alt": "Homepage of the Master Art and Frame website",
       "us.s1.t": "Small business websites",
       "us.s1.d": "Restaurants, clinics and local services: a clear, fast, bilingual online presence.",
       "us.s2.t": "Web systems",
@@ -122,7 +127,7 @@ window.I18N = (() => {
 
     es: {
       "meta.title": "Paulo Henrique — Desarrollador de Software",
-      "meta.desc": "Portafolio de Paulo Henrique: sitios web corporativos y sistemas web — VOS Advocacia, Avanço Engenharia, AABB Ipiaú, Cambio Express, Coxinha do Barão y PDV Boa Praça.",
+      "meta.desc": "Portafolio de Paulo Henrique: sitios web corporativos y sistemas web — VOS Advocacia, Avanço Engenharia, AABB Ipiaú, Cambio Express, Master Art and Frame, Coxinha do Barão y PDV Boa Praça.",
       "menu.open": "Menú",
       "menu.close": "Cerrar",
       "cursor.project": "Ver proyecto",
@@ -179,9 +184,14 @@ window.I18N = (() => {
 
       "us.eyebrow": "(04) — Estados Unidos",
       "us.title": 'Proyectos en <em class="accent">EE.&nbsp;UU.</em>',
-      "us.status": "Próximamente",
-      "us.intro": "Estoy abriendo mi agenda a empresas en Estados Unidos: sitios y sistemas bilingües, en inglés y español, con trabajo 100% remoto. Los primeros proyectos aparecerán aquí.",
+      "us.status": "Primer proyecto en línea",
+      "us.intro": "Sitios y sistemas para empresas en Estados Unidos, en inglés y español, con trabajo 100% remoto. El primero ya está en línea en Tampa, Florida.",
       "us.slot": "Cupo abierto",
+      "maf.cat": "Enmarcado a medida · Tampa, FL",
+      "maf.en": "En inglés",
+      "maf.seo": "SEO local",
+      "maf.aria": "Abrir el sitio de Master Art and Frame (nueva pestaña)",
+      "maf.alt": "Página de inicio del sitio de Master Art and Frame",
       "us.s1.t": "Sitios para pequeñas empresas",
       "us.s1.d": "Restaurantes, clínicas y servicios locales: presencia clara, rápida y bilingüe.",
       "us.s2.t": "Sistemas web",
