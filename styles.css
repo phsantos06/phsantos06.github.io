@@ -444,3 +444,8 @@ body.menu-open { overflow: hidden; }
   .manifesto { height: auto; }
   .manifesto__sticky { position: static; }
 }
+
+/* sem barra de rolagem visível (o scroll continua funcionando) */
+html { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar, .mmenu::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.mmenu { scrollbar-width: none; }
